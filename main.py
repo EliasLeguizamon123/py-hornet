@@ -1,14 +1,18 @@
 import ebooklib
+import sys
+import argparse
 from ebooklib import epub
 from bs4 import BeautifulSoup
 
 def main() -> None:
     #Read EPUB
-    book = epub.read_epub('./mistbornIV.epub')
-    items = list(book.get_items())
-    for item in items:
-        getContent(item)
-        
+    book = epub.read_epub(str(sys.argv[1]))
+    if book:
+        items = list(book.get_items())
+        for item in items:
+            getContent(item)
+    elif book is not None:
+        print('aaaaaaaaaaaaaaaaaa')
 
 
 
