@@ -3,18 +3,26 @@ import sys
 import argparse
 from ebooklib import epub
 from bs4 import BeautifulSoup
+import argparse
 
 def main() -> None:
-    #Read EPUB
-    book = epub.read_epub(str(sys.argv[1]))
-    if book:
-        items = list(book.get_items())
-        for item in items:
-            getContent(item)
-    elif book is not None:
-        print('aaaaaaaaaaaaaaaaaa')
-
-
+    # Create Arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-b", "--book",  help="Select a book to read")
+    
+    #? Show help if no pass anything or pass more than one book
+    if len(sys.argv) == 1:
+        parser.print_help(sys.stderr)
+        sys.exit(1)
+    elif len(sys.argv) > 2:
+        print('You can only read one book at time')
+        sys.exit(1)
+    
+    # Read EPUB
+    book = epub.read_epub(str(sys.argv[2]))
+    items = list(book.get_items())
+    for item in items:
+        getContent(item)
 
 def getContent(item):
     if item.get_type() == ebooklib.ITEM_DOCUMENT:
