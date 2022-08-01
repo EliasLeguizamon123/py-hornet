@@ -1,12 +1,20 @@
 import curses
-from curses import wrapper
+import curses.ascii
 
-def mainScreen():
-    #Call screen
-    curses.wrapper(printScreen)
+def mainScreen(screen):
+    while 1:
+        key = screen.getch()
 
-def printScreen(screen):
-    # Print text in screen and close when press key
-    screen.addstr('Press a key to close the program...')  
-    screen.refresh()
-    screen.getch()
+        screen.clear()
+        if key == curses.KEY_UP:
+            screen.addstr(0, 0, "You pressed Up key!")
+        elif key == curses.KEY_DOWN:
+            screen.addstr(0, 0, "You pressed Down key!")
+        elif key == curses.KEY_ENTER or key in [10, 13]:
+            screen.addstr(0, 0, "You pressed Enter.")
+        elif key == curses.ascii.ESC or ord('q'):
+            return
+
+        screen.refresh()
+
+curses.wrapper(mainScreen)
