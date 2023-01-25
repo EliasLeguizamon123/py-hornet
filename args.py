@@ -1,9 +1,9 @@
 import argparse
 import sys
-import ebooklib
 from ebooklib import epub
-
 from book import readEpub
+# import epub_meta
+# from bs4 import BeautifulSoup
 
 def generateArgs():
 
@@ -22,5 +22,4 @@ def generateArgs():
     
     # Read EPUB
     book = epub.read_epub(str(sys.argv[2]))
-
     readEpub(book)
