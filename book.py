@@ -16,7 +16,7 @@ def readEpub(book):
             if t.parent.name not in ['[document]', 'noscript', 'header', 'html', 'meta', 'head', 'input', 'script'] :
                 chapterText.append(str(t))
         output.append(''.join(chapterText))
-    print(output[11])
+    return output
     
 def getContent(items):
     chapters = []

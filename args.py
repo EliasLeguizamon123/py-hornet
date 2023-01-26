@@ -2,11 +2,11 @@ import argparse
 import sys
 from ebooklib import epub
 from book import readEpub
-# import epub_meta
-# from bs4 import BeautifulSoup
+
+global output
 
 def generateArgs():
-
+    global output
     # Create Arguments
     parser = argparse.ArgumentParser()
     parser.add_argument("-b", "--book",  help="Select a book to read")
@@ -22,4 +22,4 @@ def generateArgs():
     
     # Read EPUB
     book = epub.read_epub(str(sys.argv[2]))
-    readEpub(book)
+    return readEpub(book)
