@@ -13,36 +13,40 @@ def mainScreen(screen):
     y = 1
     index = 0
     page = pages[index]
+    screen.border()
+    screen.refresh()
+    screen.getch()
     
-    while True: 
-        
-        for word in page.split():
-            if y <= rows - 3:
-                if x + len(word) > columns - 1:
-                    y += 1
-                    x = 1
+    # while 1: 
 
-                screen.addstr(y, x, word)
-                screen.addstr(y, x - 1, ' ')
-                sleep(0.0001)
-                screen.refresh()
-                x += len(word) + 1
-            else :
-                y = 1
-                x = 1
-                screen.clear()
-                screen.addstr(y, x, word)
-                screen.addstr(y, x - 1, ' ')
-                sleep(0.0001)
-                screen.refresh()
-                x += len(word) + 1
+    #     key = screen.getch()
         
-        key = screen.getch()
+    #     for word in page.split():
+    #         screen.addstr(y, x, word)
+    #         if y <= rows - 3:
+    #             if x + len(word) > columns - 1:
+    #                 y += 1
+    #                 x = 1
+
+    #             screen.addstr(y, x, word)
+    #             screen.addstr(y, x - 1, ' ')
+    #             sleep(0.0001)
+    #             screen.refresh()
+    #             x += len(word) + 1
+    #         else :
+    #             y = 1
+    #             x = 1
+    #             screen.clear()
+    #             screen.addstr(y, x, word)
+    #             screen.addstr(y, x - 1, ' ')
+    #             sleep(0.0001)
+    #             screen.refresh()
+    #             x += len(word) + 1
         
-        if key == curses.KEY_UP:
-            index += 1
-        if key == curses.KEY_DOWN and index >= 1:
-            index -= 1
+    #     if key == curses.KEY_UP:
+    #         index += 1
+    #     if key == curses.KEY_DOWN and index >= 1:
+    #         index -= 1
             
 
 
