@@ -4,6 +4,8 @@ from book import createPages
 from args import generateArgs
     
 def mainScreen(screen):
+    curses.noecho()
+    curses.cbreak()
     output = generateArgs()
     size = screen.getmaxyx();
     rows = size[0]
@@ -13,9 +15,12 @@ def mainScreen(screen):
     y = 1
     index = 0
     page = pages[index]
-    screen.border()
-    screen.refresh()
-    screen.getch()
+    win = curses.newwin(curses.LINES, curses.COLS)
+    
+                 # L    R    T    B   TL   TR   BL   BR
+    win.border('{', '}', '~', '~', '+', '+', '+', '+')
+    win.refresh()
+    win.getch()
     
     # while 1: 
 
