@@ -25,7 +25,7 @@ def createPages(output, size):
     rows = size[0]
     pages = []
     for chapter in output:
-        lines = textwrap.wrap(chapter, width=columns)
-        for i in range(0, len(lines), rows):
+        lines = textwrap.wrap(chapter, width=columns - 4)
+        for i in range(0, len(lines), rows - 5):
             pages.append('\n'.join(lines[i:min(i + rows, len(lines))]))
     return pages

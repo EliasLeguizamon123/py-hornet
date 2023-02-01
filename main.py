@@ -4,54 +4,56 @@ from book import createPages
 from args import generateArgs
     
 def mainScreen(screen):
+    #default conf
     curses.noecho()
+    curses.curs_set(0)
     curses.cbreak()
+    #default vars
     output = generateArgs()
-    size = screen.getmaxyx();
-    rows = size[0]
-    columns = size[1]
-    pages = createPages(output, size)
-    x = 1
-    y = 1
-    index = 0
-    page = pages[index]
+    pages = createPages(output, size=[curses.LINES - 1, curses.COLS - 1])
+    x = 2
+    y = 2
+    #default win
     win = curses.newwin(curses.LINES, curses.COLS)
+    win.keypad(True)
+    index = 0
     
-                 # L    R    T    B   TL   TR   BL   BR
-    win.border('{', '}', '~', '~', '+', '+', '+', '+')
-    win.refresh()
-    win.getch()
-    
-    # while 1: 
+    while True: 
+        page = pages[index]
+        win.box()
+        for word in page.split() :
+            if y <= curses.LINES - 3 :
+                if x + len(word) > curses.COLS - 2:
+                    y += 1
+                    x = 2
 
-    #     key = screen.getch()
+                win.addstr(y, x, word)
+                win.addstr(y, x - 1, ' ')
+                sleep(0.0001)
+                win.refresh()
+                x += len(word) + 1
+            
+            else :
+                y = 2
+                x = 2
+                win.addstr(y, x, word)
+                win.addstr(y, x - 1, ' ')
+                sleep(0.0001)
+                x += len(word) + 1
+                win.clear()
+        y = 2
+        x = 2
+        win.refresh()
+        key = win.getch()
+        win.clear()
         
-    #     for word in page.split():
-    #         screen.addstr(y, x, word)
-    #         if y <= rows - 3:
-    #             if x + len(word) > columns - 1:
-    #                 y += 1
-    #                 x = 1
-
-    #             screen.addstr(y, x, word)
-    #             screen.addstr(y, x - 1, ' ')
-    #             sleep(0.0001)
-    #             screen.refresh()
-    #             x += len(word) + 1
-    #         else :
-    #             y = 1
-    #             x = 1
-    #             screen.clear()
-    #             screen.addstr(y, x, word)
-    #             screen.addstr(y, x - 1, ' ')
-    #             sleep(0.0001)
-    #             screen.refresh()
-    #             x += len(word) + 1
-        
-    #     if key == curses.KEY_UP:
-    #         index += 1
-    #     if key == curses.KEY_DOWN and index >= 1:
-    #         index -= 1
+        if key == curses.KEY_UP:
+            if index < 1:
+                index = 0
+            else :
+                index = index - 1
+        if key == curses.KEY_DOWN and index >= 1:
+            index = index + 1
             
 
 
