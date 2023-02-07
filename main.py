@@ -1,4 +1,5 @@
-import curses, os, curses.ascii
+import curses, curses.ascii
+
 from time import sleep
 from book import createPages
 from args import generateArgs
