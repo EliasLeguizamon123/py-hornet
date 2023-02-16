@@ -13,30 +13,32 @@ def checkIfDirectoryExistAndCreated() :
     else:
         print('All exist')
 
-def saveBookInData(pathBook, bookTitle, actualPage, pagesLength) :
+def saveNewBookInData(actualBook) :
     checkIfDirectoryExistAndCreated()
     os.chdir(str(Path.home()) + '/hornet')
-    # fileSavedData = open('saveData.json')
-    # savedBooks = json.load(fileSavedData)['books']
     with open('saveData.json', 'r') as fileSavedData :
         savedBooks = json.load(fileSavedData)
 
-    actualBook = { "bookTitle": bookTitle, "actualPage": actualPage, "pagesLength": pagesLength, "pathBook": pathBook }
-    
     if len(savedBooks) < 1 :
         savedBooks.append(actualBook)
                 
-    for book in savedBooks :
-        # Save actualPage
-        if book['bookTitle'] == bookTitle :
-            if book['actualPage'] != actualPage :
-                book['actualPage'] = actualPage
+    for book in savedBooks : 
         # Save new book
-        elif book['bookTitle'] != bookTitle : 
+        if book['bookTitle'] != actualBook['bookTitle']: 
             savedBooks.append(actualBook)
-            break
-        
-    with open ('saveData.json', 'w+') as jsonFile: 
+            break 
+    with open('saveData.json', 'w+') as jsonFile: 
         jsonFile.write(json.dumps(savedBooks, indent=4))
         jsonFile.close()
 
+def saveActualState(actualBook) :
+    os.chdir(str(Path.home()) + '/hornet')
+    with open('saveData.json', 'r') as fileSavedData :
+        savedBooks = json.load(fileSavedData)
+    for book in savedBooks :
+        if book['bookTitle'] == actualBook['bookTitle'] :
+            book['actualPage'] = actualBook['actualPage']
+            break
+    with open('saveData.json', 'w+') as jsonFile :
+        jsonFile.write(json.dumps(savedBooks, indent=4))
+        jsonFile.close()

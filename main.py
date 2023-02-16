@@ -3,7 +3,7 @@ import curses, curses.ascii
 from time import sleep
 from book import createPages
 from args import generateArgs
-from savingData import saveBookInData
+from savingData import saveNewBookInData, saveActualState
     
 def mainScreen(screen):
     #default conf
@@ -19,7 +19,7 @@ def mainScreen(screen):
     win = curses.newwin(curses.LINES, curses.COLS)
     win.keypad(True)
     index = 0
-    saveBookInData(output["bookPath"], output["bookTitle"], index, len(pages))
+    saveNewBookInData({"bookPath": output['bookPath'], "bookTitle": output['bookTitle'], "actualPage": index, "pagesLength": len(pages)})
     
     while True: 
         page = pages[index]
@@ -37,14 +37,16 @@ def mainScreen(screen):
         key = win.getch()
         win.clear()
         
-        if key == curses.KEY_UP:
+        if key == curses.KEY_UP :
             if index < 1:
                 index = 0
             else :
                 index = index - 1
-        if key == curses.KEY_DOWN:
+        if key == curses.KEY_DOWN :
             index = index + 1
-            
+        if key == ord('q') : 
+            saveActualState({"bookPath": output['bookPath'], 'bookTitle': output['bookTitle'], "actualPage": index, 'pagesLength': len(pages)})
+            break
 
 
 if __name__ == "__main__":
