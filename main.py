@@ -44,7 +44,7 @@ def mainScreen(screen):
                 index = index - 1
         if key == curses.KEY_DOWN :
             index = index + 1
-        if key == ord('q') : 
+        if key == ord('q') or key == 27 : 
             saveActualState({"bookPath": output['bookPath'], 'bookTitle': output['bookTitle'], "actualPage": index, 'pagesLength': len(pages)})
             break
 
