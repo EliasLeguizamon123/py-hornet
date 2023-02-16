@@ -3,6 +3,7 @@ import curses, curses.ascii
 from time import sleep
 from book import createPages
 from args import generateArgs
+from savingData import saveBookInData
     
 def mainScreen(screen):
     #default conf
@@ -11,13 +12,14 @@ def mainScreen(screen):
     curses.cbreak()
     #default vars
     output = generateArgs()
-    pages = createPages(output, size=[curses.LINES - 1, curses.COLS - 1])
+    pages = createPages(output["content"], size=[curses.LINES - 1, curses.COLS - 1])
     x = 2
     y = 2
     #default win
     win = curses.newwin(curses.LINES, curses.COLS)
     win.keypad(True)
     index = 0
+    saveBookInData(output["bookPath"], output["bookTitle"], index, len(pages))
     
     while True: 
         page = pages[index]

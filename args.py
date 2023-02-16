@@ -19,4 +19,4 @@ def generateArgs():
     book = epub.read_epub(str(sys.argv[2]))
     bookTitle = book.get_metadata('DC', 'title')
     bookPath = os.path.abspath(str(sys.argv[2]))
-    return {"content": readEpub(book), "bookPath": bookPath, "bookTitle": bookTitle }
+    return {"content": readEpub(book), "bookPath": bookPath, "bookTitle": bookTitle[0][0] }
