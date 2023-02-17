@@ -1,12 +1,8 @@
-import argparse
-import sys
+import argparse, sys, os
 from ebooklib import epub
 from book import readEpub
 
-global output
-
 def generateArgs():
-    global output
     # Create Arguments
     parser = argparse.ArgumentParser()
     parser.add_argument("-b", "--book",  help="Select a book to read")
@@ -19,7 +15,8 @@ def generateArgs():
     elif len(sys.argv) > 3:
         print('You can only read one book at time')
         sys.exit(1)
-    
-    # Read EPUB
+
     book = epub.read_epub(str(sys.argv[2]))
-    return readEpub(book)
+    bookTitle = book.get_metadata('DC', 'title')
+    bookPath = os.path.abspath(str(sys.argv[2]))
+    return {"content": readEpub(book), "bookPath": bookPath, "bookTitle": bookTitle[0][0] }
