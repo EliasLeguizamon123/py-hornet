@@ -1,22 +1,29 @@
-import os, json
+import os, json, platform
 from pathlib import Path
+
+PLATFORM = platform.platform()
+SAVE_PATH = f'{Path.home()}\hornet\\' if 'windows' in PLATFORM.lower() else f'{Path.home()}/hornet/'
 
 def checkIfDirectoryExistAndCreated() :
     # global output
-    fileName = str(Path.home()) +'/hornet/saveData.json'
+    fileName = SAVE_PATH + 'saveData.json'
     if not os.path.exists(fileName) :
-        if not os.path.exists(str(Path.home()) + '/hornet') :
-            os.system('mkdir ~/hornet/')
+        if not os.path.exists(SAVE_PATH) :
+            os.system(f'mkdir {SAVE_PATH}')
             print("directory created ok")
-        os.system('cp ./saveData.json ~/hornet/saveData.json')
+
+        if 'windows' in PLATFORM.lower():
+            os.system(f'copy .\saveData.json {SAVE_PATH}saveData.json')
+        else:
+            os.system(f'cp ./saveData.json {SAVE_PATH}saveData.json')
+
         print('File created')
-    # elif not os.path.exists(str(Path.home()) + '/hornet') :
     else:
         print('All exist')
 
 def saveNewBookInData(actualBook) :
     # checkIfDirectoryExistAndCreated()
-    os.chdir(str(Path.home()) + '/hornet')
+    os.chdir(SAVE_PATH)
     with open('saveData.json', 'r') as fileSavedData :
         savedBooks = json.load(fileSavedData)
 
@@ -33,7 +40,7 @@ def saveNewBookInData(actualBook) :
         jsonFile.close()
 
 def saveActualState(actualBook) :
-    os.chdir(str(Path.home()) + '/hornet')
+    os.chdir(SAVE_PATH)
     with open('saveData.json', 'r') as fileSavedData :
         savedBooks = json.load(fileSavedData)
     for book in savedBooks :
@@ -45,7 +52,7 @@ def saveActualState(actualBook) :
         jsonFile.close()
 
 def loadBookState(actualBook) :
-    os.chdir(str(Path.home()) + '/hornet')
+    os.chdir(SAVE_PATH)
     with open('saveData.json', 'r') as fileSavedData :
         savedBooks = json.load(fileSavedData)
     for book in savedBooks :
