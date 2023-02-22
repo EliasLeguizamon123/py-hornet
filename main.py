@@ -7,16 +7,16 @@ from savingData import saveNewBookInData, saveActualState, loadBookState, checkI
     
 def mainScreen(screen):
     checkIfDirectoryExistAndCreated()
-    #default conf
+    # Default conf
     curses.noecho()
     curses.curs_set(0)
     curses.cbreak()
-    #default vars
+    # Generate Pages
     output = generateArgs()
     pages = createPages(output["content"], size=[curses.LINES - 1, curses.COLS - 1])
     x = 2
     y = 2
-    #default win
+    # Default win
     win = curses.newwin(curses.LINES, curses.COLS)
     win.keypad(True)
     saveNewBookInData({"bookPath": output['bookPath'], "bookTitle": output['bookTitle'], "actualPage": 0, "pagesLength": len(pages)})

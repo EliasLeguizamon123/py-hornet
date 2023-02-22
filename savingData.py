@@ -18,8 +18,6 @@ def checkIfDirectoryExistAndCreated() :
             os.system(f'cp ./saveData.json {SAVE_PATH}saveData.json')
 
         print('File created')
-    else:
-        print('All exist')
 
 def saveNewBookInData(actualBook) :
     # checkIfDirectoryExistAndCreated()
