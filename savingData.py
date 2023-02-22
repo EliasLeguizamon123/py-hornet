@@ -42,9 +42,10 @@ def saveActualState(actualBook) :
     os.chdir(SAVE_PATH)
     with open('saveData.json', 'r') as fileSavedData :
         savedBooks = json.load(fileSavedData)
-    for book in savedBooks :
+    for index, book in enumerate(savedBooks) :
         if book['bookTitle'] == actualBook['bookTitle'] :
-            book['actualPage'] = actualBook['actualPage']
+            # book['actualPage'] = actualBook['actualPage']
+            savedBooks[index], savedBooks[-1] = savedBooks[-1], savedBooks[index]
             break
     with open('saveData.json', 'w+') as jsonFile :
         jsonFile.write(json.dumps(savedBooks, indent=4))
