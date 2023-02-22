@@ -3,7 +3,24 @@
 </p>
 
 # 🪡 py-hornet
-py-Hornet is a terminal/CLI Epub reader made in python.
+py-hornet is a terminal/CLI Epub reader elegant and classic, made with python.
 
+## Required Dependencies
 
+- Windows `windows-curses`
 
+## Download
+> At the moment you only can download manually but in the future i add new ways of downloads
+
+- Manually: Clone this repo, install requirements.txt and run `python3 main.py -b BOOK`
+
+## Todo: 
+
+- [x] Save state when you close
+- [ ] Arguments work with problems
+- [ ] If not pass args load last book
+- [ ] Table of contents
+- [ ] Show actual page and all pages
+- [ ] Bookmarks
+- [ ] Resize window broke the app
+- [ ] Add into pypi
