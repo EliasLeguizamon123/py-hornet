@@ -28,6 +28,7 @@ Some screenshots in diferents terminals but only in linux for the moment.
 ## Todo: 
 
 - [x] Save state when you close
+- [ ] Book is duplicating when you read more than 2 books
 - [x] Arguments work with problems `fixed in dev (pr2)`
 - [ ] If not pass args load last book
 - [ ] Table of contents
