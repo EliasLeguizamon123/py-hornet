@@ -25,14 +25,15 @@ def saveNewBookInData(actualBook) :
     with open('saveData.json', 'r') as fileSavedData :
         savedBooks = json.load(fileSavedData)
 
-    if len(savedBooks) < 1 :
+    if len(savedBooks) < 1 or all(book['bookTitle'] != actualBook['bookTitle'] for book in savedBooks):
         savedBooks.append(actualBook)
                 
-    for book in savedBooks : 
-        # Save new book
-        if book['bookTitle'] != actualBook['bookTitle'] : 
-            savedBooks.append(actualBook)
-            break 
+    
+    # for book in savedBooks : 
+    #     # Save new book
+    #     if book['bookTitle'] != actualBook['bookTitle'] : 
+    #         savedBooks.append(actualBook)
+    #         break 
     with open('saveData.json', 'w+') as jsonFile: 
         jsonFile.write(json.dumps(savedBooks, indent=4))
         jsonFile.close()
