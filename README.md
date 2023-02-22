@@ -15,7 +15,7 @@ py-hornet is a terminal/CLI Epub reader elegant and classic, made with python.
 - Manually: Clone this repo, install requirements.txt and run `python3 main.py -b BOOK`
 
 ## Screenshots
-Some screenshots in diferents terminals.
+Some screenshots in diferents terminals but only in linux for the moment.
 - Gnome terminal
 <img src="https://github.com/EliasLeguizamon123/py-hornet/blob/main/screenshots/hornetGnome.png?raw=true" />
 
