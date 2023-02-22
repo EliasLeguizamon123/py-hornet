@@ -28,7 +28,7 @@ Some screenshots in diferents terminals but only in linux for the moment.
 ## Todo: 
 
 - [x] Save state when you close
-- [ ] Arguments work with problems
+- [x] Arguments work with problems `fixed in dev (pr2)`
 - [ ] If not pass args load last book
 - [ ] Table of contents
 - [ ] Show actual page and all pages
